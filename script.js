@@ -100,7 +100,7 @@ status.innerHTML="Řekl jste: "+command;
 
 
 let answer =
-jarvisResponse(command);
+getAIResponse(command);
 
 
 chat.innerHTML=answer;
@@ -168,3 +168,43 @@ speak(answer);
 input.value="";
 
 };
+async function getAIResponse(message){
+
+try{
+
+let response = await fetch(
+"https://TVUJ_SERVER/adresa",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+message:message
+})
+}
+);
+
+
+let data = await response.json();
+
+
+chat.innerHTML=data.reply;
+
+speak(data.reply);
+
+
+}
+
+catch(error){
+
+let fallback =
+"Nemohu se spojit s mým AI systémem.";
+
+chat.innerHTML=fallback;
+
+speak(fallback);
+
+}
+
+}
