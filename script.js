@@ -208,3 +208,74 @@ speak(fallback);
 }
 
 }
+// JARVIS systémové informace
+
+function updateClock(){
+
+let now = new Date();
+
+document.getElementById("clock").innerHTML =
+now.toLocaleTimeString("cs-CZ")
++
+" | "
++
+now.toLocaleDateString("cs-CZ");
+
+}
+
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+
+// baterie
+
+if(navigator.getBattery){
+
+navigator.getBattery()
+.then(function(battery){
+
+document.getElementById("battery").innerHTML =
+"🔋 Baterie: "
++
+Math.round(battery.level*100)
++
+"%";
+
+});
+
+}
+
+
+// pozdrav
+
+setTimeout(()=>{
+
+let hour = new Date().getHours();
+
+let greeting;
+
+if(hour < 12){
+
+greeting="Dobré ráno. JARVIS je připraven.";
+
+}
+else if(hour < 18){
+
+greeting="Dobrý den. JARVIS je online.";
+
+}
+else{
+
+greeting="Dobrý večer. JARVIS je připraven.";
+
+}
+
+
+chat.innerHTML=greeting;
+
+speak(greeting);
+
+
+},1500);
