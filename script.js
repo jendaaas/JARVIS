@@ -120,3 +120,14 @@ status.innerHTML=
 "Toto zařízení nepodporuje hlasové ovládání.";
 
 }
+// spuštění JARVIS aplikace
+if ("serviceWorker" in navigator) {
+
+navigator.serviceWorker.register("service-worker.js")
+.then(() => {
+
+console.log("JARVIS systém aktivní");
+
+});
+
+}
