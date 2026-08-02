@@ -131,3 +131,40 @@ console.log("JARVIS systém aktivní");
 });
 
 }
+const input = document.getElementById("input");
+const send = document.getElementById("send");
+const messages = document.getElementById("messages");
+
+
+function addMessage(author,text){
+
+let msg=document.createElement("p");
+
+msg.innerHTML="<b>"+author+":</b> "+text;
+
+messages.appendChild(msg);
+
+}
+
+
+send.onclick=function(){
+
+let text=input.value;
+
+if(text=="") return;
+
+
+addMessage("Vy",text);
+
+
+let answer=jarvisResponse(text);
+
+
+addMessage("JARVIS",answer);
+
+speak(answer);
+
+
+input.value="";
+
+};
